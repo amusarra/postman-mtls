@@ -1,0 +1,93 @@
+{
+    "info": {
+        "name": "Quarkus mTLS",
+        "description": "Collection Postman per il test di servizi Rest protetti da un meccanismo di sicurezza di tipo mTLS.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "connection-info/info",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}{{api_connection_info_path}}",
+                    "host": [
+                        "{{base_url}}{{api_connection_info_path}}"
+                    ]
+                },
+                "description": "La risposta del servizio conterrà un set d'informazioni che riguardano la connessione instaurata."
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "console.log('Environment attivo:', pm.environment.get('env_name'));",
+                            "if (pm.environment.get('env_name') === 'local') {",
+                            "    pm.test('Status code is 403', function () {",
+                            "        pm.response.to.have.status(403);",
+                            "    });",
+                            "} else if (pm.environment.get('env_name') === 'test') {",
+                            "    pm.test('Status code is 200', function () {",
+                            "        pm.response.to.have.status(200);",
+                            "    });",
+                            "    pm.test('Content-Type is application/json', function () {",
+                            "        pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+                            "    });",
+                            "    pm.test('certCommonName is rd.quarkus.dontesta.it', function () {",
+                            "        var jsonData = pm.response.json();",
+                            "        pm.expect(jsonData.server.certCommonName).to.eql('rd.quarkus.dontesta.it');",
+                            "    });",
+                            "}"
+                        ]
+                    }
+                }
+            ],
+            "response": []
+        },
+        {
+            "name": "connection-info/user-identity",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}{{api_connection_user_identity}}",
+                    "host": [
+                        "{{base_url}}{{api_connection_user_identity}}"
+                    ]
+                },
+                "description": "La risposta del servizio conterrà un set d'informazioni che riguardano l'indentità del client che ha richiesto l'accesso alla risorsa."
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "console.log('Environment attivo:', pm.environment.get('env_name'));",
+                            "if (pm.environment.get('env_name') === 'local') {",
+                            "    pm.test('Status code is 200', function () {",
+                            "        pm.response.to.have.status(200);",
+                            "    });",
+                            "    pm.test('Content-Type is application/json', function () {",
+                            "        pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+                            "    });",
+                            "    pm.test('deviceId is valid', function () {",
+                            "        var jsonData = pm.response.json();",
+                            "        pm.expect(jsonData.attributes.deviceId).to.eql('MTc1NzAyNTE3OTk3MDAwODAwMCM1MjQwOGJkNC1hZjQzLTQwZjYtODgxZi00YWNjOTQ4OTM3MjEjYW11c2FycmEtbWFjYm9vay1wcm8ubG9jYWwjMmVlNjA0Y2IyYzQ1Yjk0NDkwZDhmOWZiYTU4MTEwNjhkNDk1MmUwNjlkMzRmMzc0MjA5ODAzZmNjMjQ5ZWIxOA==');",
+                            "    });",
+                            "} else if (pm.environment.get('env_name') === 'test') {",
+                            "    pm.test('Status code is 401', function () {",
+                            "        pm.response.to.have.status(401);",
+                            "    });",
+                            "}"
+                        ]
+                    }
+                }
+            ],
+            "response": []
+        }
+    ]
+}

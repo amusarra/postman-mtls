@@ -1,0 +1,39 @@
+{
+    "info": {
+        "name": "Quarkus mTLS",
+        "description": "Collection Postman per il test di servizi Rest protetti da un meccanismo di sicurezza di tipo mTLS.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "connection-info/info",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}{{api_connection_info_path}}",
+                    "host": [
+                        "{{base_url}}{{api_connection_info_path}}"
+                    ]
+                },
+                "description": "La risposta del servizio conterrà un set d'informazioni che riguardano la connessione instaurata."
+            },
+            "response": []
+        },
+        {
+            "name": "connection-info/user-identity",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}{{api_connection_user_identity}}",
+                    "host": [
+                        "{{base_url}}{{api_connection_user_identity}}"
+                    ]
+                },
+                "description": "La risposta del servizio conterrà un set d'informazioni che riguardano l'indentità del client che ha richiesto l'accesso alla risorsa."
+            },
+            "response": []
+        }
+    ]
+}

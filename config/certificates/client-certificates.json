@@ -1,0 +1,31 @@
+[
+  {
+    "name": "local-certificate-1",
+    "matches": ["https://localhost:8443/api/v1/connection-info/info"],
+    "key": { "src": "certificates/client/client_with_device_id_and_roles_key.pem" },
+    "cert": { "src": "certificates/client/client_with_device_id_and_roles_cert.pem" },
+    "passphrase": "pZAXwq+l1BRlC+3X",
+    "ca": { "src": "certificates/ca/ca_cert.pem" }
+  },
+  {
+    "name": "local-certificate-2",
+    "matches": ["https://localhost:8443/api/v1/connection-info/user-identity"],
+    "key": { "src": "certificates/client/client_with_device_id_and_roles_1_key.pem" },
+    "cert": { "src": "certificates/client/client_with_device_id_and_roles_1_cert.pem" },
+    "passphrase": "z93Fl8nhQR8shWTq"
+  },
+  {
+    "name": "test-certificate-1",
+    "matches": ["https://blog.quarkus.dontesta.it:8443/api/v1/connection-info/user-identity"],
+    "key": { "src": "certificates/client/client_new_device_id_key.pem" },
+    "cert": { "src": "certificates/client/client_new_device_id_cert.pem" },
+    "passphrase": "4l0nJ9nvreqleFnV"
+  },
+  {
+    "name": "test-certificate-2",
+    "matches": ["https://blog.quarkus.dontesta.it:8443/api/v1/connection-info/info"],
+    "key": { "src": "certificates/client/client_with_device_id_and_roles_1_key.pem" },
+    "cert": { "src": "certificates/client/client_with_device_id_and_roles_1_cert.pem" },
+    "passphrase": "z93Fl8nhQR8shWTq"
+  }
+]
