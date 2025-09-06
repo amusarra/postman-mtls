@@ -36,6 +36,8 @@ jobs:
             --environment config/environments/local.json \
             --ssl-client-cert-list config/certificates/client-certificates.json \
             --ssl-extra-ca-certs certificates/ca/ca_cert.pem \
+            --verbose \
+            --reporters html \
             --reporter-html-export postman_report.html
 
       - name: Upload Postman Report
