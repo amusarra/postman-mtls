@@ -68,9 +68,9 @@ jobs:
       - name: Add summary with report link
         run: |
           echo "## Postman Test Report" >> $GITHUB_STEP_SUMMARY
-          echo "Scarica il report HTML generato dai test di Postman:" >> $GITHUB_STEP_SUMMARY
-          echo "- [Download postman_report_local.html](./artifact/postman-report-local/postman_report_local.html)" >> $GITHUB_STEP_SUMMARY
-          echo "- [Download postman_report_test.html](./artifact/postman-report-test/postman_report_test.html)" >> $GITHUB_STEP_SUMMARY
+          echo "I report HTML generati dai test di Postman sono disponibili come artifact di questa run:" >> $GITHUB_STEP_SUMMARY
+          echo "- Per l'ambiente local: postman-report-local" >> $GITHUB_STEP_SUMMARY
+          echo "- Per l'ambiente test: postman-report-test" >> $GITHUB_STEP_SUMMARY
 
       - name: Stop and remove Podman container
         if: always()
