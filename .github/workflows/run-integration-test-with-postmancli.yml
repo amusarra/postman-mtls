@@ -1,0 +1,36 @@
+name: Postman REST API Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Set up Podman and run Quarkus mTLS Auth project
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
+          podman pull docker.io/quarkus/quarkus-mtls-auth:latest
+          podman run -d --name quarkus-mtls-auth -p 8443:8443 quarkus/quarkus-mtls-auth:latest
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      - name: Run Postman Collection
+        run: |
+            postman collection run collections/quarkus-mtls-collection-with-test.json \
+            --environment config/environments/local.json \
+            --ssl-client-cert-list config/certificates/client-certificates.json \
+            --ssl-extra-ca-certs certificates/ca/ca_cert.pem
+      - name: Stop and remove Podman container
+        run: |
+          podman stop quarkus-mtls-auth
+          podman rm quarkus-mtls-auth
