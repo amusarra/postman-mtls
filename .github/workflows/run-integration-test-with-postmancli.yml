@@ -1,4 +1,4 @@
-name: Postman REST API Tests
+name: Postman mTLS REST API tests
 
 on:
   push:
@@ -30,13 +30,22 @@ jobs:
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
-      - name: Run Postman Collection
+      - name: Run Postman Collection and Generate Report
         run: |
             postman collection run collections/quarkus-mtls-collection-with-test.json \
             --environment config/environments/local.json \
             --ssl-client-cert-list config/certificates/client-certificates.json \
-            --ssl-extra-ca-certs certificates/ca/ca_cert.pem
+            --ssl-extra-ca-certs certificates/ca/ca_cert.pem \
+            --reporter-html-export postman_report.html
+
+      - name: Upload Postman Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-report
+          path: postman_report.html
+
       - name: Stop and remove Podman container
+        if: always()
         run: |
           podman stop quarkus-mtls-auth
           podman rm quarkus-mtls-auth
