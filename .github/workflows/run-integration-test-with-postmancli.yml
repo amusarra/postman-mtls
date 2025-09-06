@@ -23,8 +23,8 @@ jobs:
 
       - name: Run Quarkus mTLS Auth project
         run: |
-          podman pull docker.io/quarkus/quarkus-mtls-auth:latest
-          podman run -d --name quarkus-mtls-auth -p 8443:8443 quarkus/quarkus-mtls-auth:latest
+          podman pull docker.io/amusarra/quarkus-mtls-auth:latest
+          podman run -d --name quarkus-mtls-auth -p 8443:8443 amusarra/quarkus-mtls-auth:latest
 
       - name: Install Postman CLI
         run: |
