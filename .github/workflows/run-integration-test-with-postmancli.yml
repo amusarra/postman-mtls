@@ -37,7 +37,7 @@ jobs:
             --ssl-client-cert-list config/certificates/client-certificates.json \
             --ssl-extra-ca-certs certificates/ca/ca_cert.pem \
             --verbose \
-            --reporters html \
+            --reporters html,cli \
             --reporter-html-export postman_report.html
 
       - name: Upload Postman Report
@@ -45,6 +45,12 @@ jobs:
         with:
           name: postman-report
           path: postman_report.html
+
+      - name: Add summary with report link
+        run: |
+          echo "## Postman Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "Scarica il report HTML generato dai test di Postman:" >> $GITHUB_STEP_SUMMARY
+          echo "[Download postman_report.html](./artifact/postman-report/postman_report.html)" >> $GITHUB_STEP_SUMMARY
 
       - name: Stop and remove Podman container
         if: always()
