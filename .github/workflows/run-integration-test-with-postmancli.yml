@@ -18,6 +18,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y podman
 
+      - name: Add FQDN to /etc/hosts
+        run: |
+          echo "127.0.0.1 blog.quarkus.dontesta.it" | sudo tee -a /etc/hosts
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_TOKEN }}" | podman login docker.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
@@ -30,7 +34,7 @@ jobs:
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
-      - name: Run Postman Collection and Generate Report
+      - name: Run Postman Collection and Generate Report for local environment
         run: |
             postman collection run collections/quarkus-mtls-collection-with-test.json \
             --environment config/environments/local.json \
@@ -38,19 +42,35 @@ jobs:
             --ssl-extra-ca-certs certificates/ca/ca_cert.pem \
             --verbose \
             --reporters html,cli \
-            --reporter-html-export postman_report.html
+            --reporter-html-export postman_report_local.html
+      - name: Run Postman Collection and Generate Report for test environment
+        run: |
+            postman collection run collections/quarkus-mtls-collection-with-test.json \
+            --environment config/environments/test.json \
+            --ssl-client-cert-list config/certificates/client-certificates.json \
+            --ssl-extra-ca-certs certificates/ca/ca_cert.pem \
+            --verbose \
+            --reporters html,cli \
+            --reporter-html-export postman_report_test.html
 
-      - name: Upload Postman Report
+      - name: Upload Postman Report for local environment
         uses: actions/upload-artifact@v4
         with:
-          name: postman-report
-          path: postman_report.html
+          name: postman-report-local
+          path: postman_report_local.html
+
+      - name: Upload Postman Report for test environment
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-report-test
+          path: postman_report_test.html
 
       - name: Add summary with report link
         run: |
           echo "## Postman Test Report" >> $GITHUB_STEP_SUMMARY
           echo "Scarica il report HTML generato dai test di Postman:" >> $GITHUB_STEP_SUMMARY
-          echo "[Download postman_report.html](./artifact/postman-report/postman_report.html)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Download postman_report_local.html](./artifact/postman-report-local/postman_report_local.html)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Download postman_report_test.html](./artifact/postman-report-test/postman_report_test.html)" >> $GITHUB_STEP_SUMMARY
 
       - name: Stop and remove Podman container
         if: always()
