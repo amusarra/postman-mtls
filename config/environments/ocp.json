@@ -1,0 +1,34 @@
+{
+  "id": "quarkus-mtls-ocp-environment",
+  "name": "Quarkus mTLS OpenShift Platform environment",
+  "values": [
+    {
+        "key": "env_name",
+        "value": "ocp",
+        "description": "Name of the environment",
+        "type": "default",
+        "enabled": true
+    },
+    {
+      "key": "base_url",
+      "value": "https://quarkus-mtls-auth-antonio-musarra-dev.apps.rm2.thpm.p1.openshiftapps.com",
+      "description": "Base URL for the OpenShift environment",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_connection_info_path",
+      "value": "/api/v1/connection-info/info",
+      "description": "Path for API connection info",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_connection_user_identity",
+      "value": "/api/v1/connection-info/user-identity",
+      "description": "Path for API user identity",
+      "type": "default",
+      "enabled": true
+    }
+  ]
+}

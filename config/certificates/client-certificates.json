@@ -27,5 +27,19 @@
     "key": { "src": "certificates/client/client_with_device_id_and_roles_1_key.pem" },
     "cert": { "src": "certificates/client/client_with_device_id_and_roles_1_cert.pem" },
     "passphrase": "z93Fl8nhQR8shWTq"
+  },
+  {
+    "name": "ocp-certificate-1",
+    "matches": ["https://quarkus-mtls-auth-antonio-musarra-dev.apps.rm2.thpm.p1.openshiftapps.com/api/v1/connection-info/user-identity"],
+    "key": { "src": "certificates/client/client_new_device_id_key.pem" },
+    "cert": { "src": "certificates/client/client_new_device_id_cert.pem" },
+    "passphrase": "4l0nJ9nvreqleFnV"
+  },
+  {
+    "name": "ocp-certificate-2",
+    "matches": ["https://quarkus-mtls-auth-antonio-musarra-dev.apps.rm2.thpm.p1.openshiftapps.com/api/v1/connection-info/info"],
+    "key": { "src": "certificates/client/client_with_device_id_and_roles_1_key.pem" },
+    "cert": { "src": "certificates/client/client_with_device_id_and_roles_1_cert.pem" },
+    "passphrase": "z93Fl8nhQR8shWTq"
   }
 ]
