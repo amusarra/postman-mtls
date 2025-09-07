@@ -24,4 +24,4 @@ Include script, certificati di esempio e istruzioni per testare API protette tra
 
 Questo progetto Postman è stato creato facendo riferimento al progetto [quarkus-mtls-auth](https://github.com/amusarra/quarkus-mtls-auth/).
 
-> Segui la [Guida Avanzata: mTLS con Postman CLI, Ambienti e Certificati Multipli](https://github.com/amusarra/quarkus-mtls-auth/blob/main/src/main/docs/markdown/article/export/pdf/guida_avanzata_mtls_postman_cli_ambienti_certificati_multipli_v1.0.1.pdf) per scoprire come utilizzare questo progetto in modo semplice ed efficace e come adeguare le configurazioni alle tue esigenze.
+> Segui la [Guida Avanzata: mTLS con Postman CLI, Ambienti e Certificati Multipli](https://github.com/amusarra/quarkus-mtls-auth/blob/main/src/main/docs/markdown/article/export/pdf/guida_avanzata_mtls_postman_cli_ambienti_certificati_multipli_v1.0.2.pdf) per scoprire come utilizzare questo progetto in modo semplice ed efficace e come adeguare le configurazioni alle tue esigenze.
