@@ -4,8 +4,7 @@
     "matches": ["https://localhost:8443/api/v1/connection-info/info"],
     "key": { "src": "certificates/client/client_with_device_id_and_roles_key.pem" },
     "cert": { "src": "certificates/client/client_with_device_id_and_roles_cert.pem" },
-    "passphrase": "pZAXwq+l1BRlC+3X",
-    "ca": { "src": "certificates/ca/ca_cert.pem" }
+    "passphrase": "pZAXwq+l1BRlC+3X"
   },
   {
     "name": "local-certificate-2",
